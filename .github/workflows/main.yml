@@ -1,32 +1,18 @@
-name: DeployToGitHubPages
-env:
-  PUBLISH_DIR: BlazorOnGitHubPages/bin/Release/net5.0/publish/wwwroot
+name: Deploy to GitHub Pages
 
-# Controls when the action will run
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Publish app
-      run: dotnet publish -c Release
-
-    - name: Rewrite base href
-      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
-      with:
-        html_path: ${{ env.PUBLISH_DIR }}/index.html
-        base_href: /BlazorOnGitHubPages/
-
-    - name: GitHub Pages
-      if: success()
-      uses: crazy-max/ghaction-github-pages@v1.5.1
-      with:
-        target_branch: gh-pages
-        build_dir: ${{ env.PUBLISH_DIR }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: proulxsamuel/deploy-blazor-to-gh-pages@master
+        with:
+          # The path to the Blazor project in the repository.
+          # Default: '.'
+          project_path: 'path/to/project'  
