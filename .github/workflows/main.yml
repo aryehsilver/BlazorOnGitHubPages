@@ -15,4 +15,4 @@ jobs:
         with:
           # The path to the Blazor project in the repository.
           # Default: '.'
-          project_path: 'path/to/project'  
+          project_path: 'bin/Release/net5.0/publish/wwwroot'  
