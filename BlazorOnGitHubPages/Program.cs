@@ -1,3 +1,4 @@
+using Blazor.Analytics;
 using BlazorOnGitHubPages;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,5 +11,6 @@ builder.RootComponents.Add<App>("#app");
 builder.Services.AddScoped(sp => new HttpClient {
   BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
 });
+builder.Services.AddGoogleAnalytics("G-X5GJT7QY9W");
 
 await builder.Build().RunAsync();
